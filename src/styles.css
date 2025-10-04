@@ -1,1 +1,55 @@
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  margin-bottom: 20px;
+  position: relative;
+  width: 300px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-top {
+  background-color: #3B82F6;
+  color: white;
+  padding: 4px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #2563EB;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.card-body {
+  padding: 15px;
+  flex: 1;
+}
+
+.btn-fechar {
+  background: #ff5c5c;
+  border: none;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.btn-fechar:hover {
+  transform: scale(1.1);
+}
 /* You can add global styles to this file, and also import other style files */

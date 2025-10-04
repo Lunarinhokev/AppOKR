@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-top">
+    <span class="card-title">Painel de Controle</span>
+    <button class="btn-fechar" (click)="removerPanel()">×</button>
+  </div>
+  <div class="card-body">
+    <label>Cliente:</label>
+    <select [(ngModel)]="clienteSelecionado">
+      <option *ngFor="let c of clientes" [value]="c">{{c}}</option>
+    </select>
+
+    <p>Data atual: {{dataAtual | date:'shortDate'}}</p>
+    <p>Documentos a processar: {{documentosProcessar}}</p>
+    <p>Total de documentos: {{totalDocumentos}}</p>
+    <p>% Processamento manual: {{percManual}}%</p>
+    <p>% Processamento automático: {{percAutomatico}}%</p>
+  </div>
+</div>
