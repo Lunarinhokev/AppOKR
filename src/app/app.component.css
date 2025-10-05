@@ -14,20 +14,16 @@ body {
 .container {
   flex: 1;
   min-height: 100vh;
-  width: 100%;
+  width: 100%;                 /* garante que ocupe toda largura */
   background-color: #FFFCEE;         
   background-image: radial-gradient(#D6CDAA 1px, transparent 1px); /* pontinhos discretos */
-  background-size: 20px 20px;
-  padding: 0;
-  margin: 0;
+  background-size: 30px 30px;
+  background-repeat: repeat;    /* garante repetição por toda a tela */
+  background-position: top left;
   box-sizing: border-box;
   position: relative;
-}
-
-.container {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 0 20px;
+  padding: 0;
+  margin: 0;
 }
 
 h1 {
@@ -43,6 +39,8 @@ h1 {
   margin: 0;
   padding: 0;
   z-index: 1000;
+  display: inline-block;
+  margin-right: 20px;
 }
 
 .btn-adicionar {
@@ -111,6 +109,21 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: flex-start; 
+}
+
+.control-card {
+  position: absolute; /* free */
+  min-width: 220px;
+  max-width: 280px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  cursor: grab; 
+  transition: transform 0.2s, box-shadow 0.3s;
 }
 
 .relatorio-card {
@@ -120,3 +133,45 @@ h1 {
   min-width: 300px;
   text-align: center;
 }
+
+.topo-fixo {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  text-align: right;
+  z-index: 1000;
+}
+
+.topo-fixo h1 {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1A243A;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.topo-fixo {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  text-align: right;
+  z-index: 1000;
+}
+
+.topo-fixo h1 {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1A243A;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.data-atual {
+  font-size: 18px;
+  color: #555;
+  margin-top: 35px;   /* espaço entre o título e a data */
+}
+
+
