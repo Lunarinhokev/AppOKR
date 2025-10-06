@@ -5,6 +5,7 @@
 
 <div class="container">
   <button class="btn-adicionar" (click)="mostrarOpcao = !mostrarOpcao">+</button>
+
   <div *ngIf="mostrarOpcao" class="menu-flutuante">
     <button class="opcao" (click)="adicionarPanel('controle')">
       Criar Tela de Controle
@@ -15,17 +16,24 @@
   </div>
 
   <div *ngFor="let p of panels; let i = index"
-        class="control-card"
-        [ngStyle]="{'top.px': p.top, 'left.px': p.left}">
+       [ngStyle]="{'top.px': p.top, 'left.px': p.left, 'position':'absolute'}">
 
-      <!-- Control-->
-    <app-control-panel *ngIf="p.type==='controle'" (remove)="panels.splice(i,1)"></app-control-panel>
+    <!-- Painel de Controle -->
+    <app-control-panel *ngIf="p.type==='controle'"
+                       (remove)="panels.splice(i,1)"
+                       (mousedownTopbar)="startDrag($event, p)">
+    </app-control-panel>
 
-        <!-- Report-->
+    <!-- Relatório -->
     <div *ngIf="p.type==='relatorio'" class="relatorio-card">
-          <div class="card-body">
-            <p>Tela de Relatório (em construção)</p>
-          </div>
+      <div class="card-top" (mousedown)="startDrag($event, p)">
+        <span class="card-title">Relatório</span>
+        <button class="btn-fechar" (click)="panels.splice(i,1)">×</button>
+      </div>
+      <div class="card-body">
+        <p>Tela de Relatório (em construção)</p>
+      </div>
     </div>
+
   </div>
 </div>

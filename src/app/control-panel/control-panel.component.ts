@@ -12,6 +12,7 @@ import { MOCK_CLIENTES } from '../mock-dados';
 })
 export class ControlPanelComponent implements OnInit {
   @Output() remove = new EventEmitter<void>();
+  @Output() mousedownTopbar = new EventEmitter<MouseEvent>(); // envia drag para o AppComponent
 
   clientes = MOCK_CLIENTES.map(c => c.nome);
   clienteSelecionado: string = this.clientes[0];
@@ -77,5 +78,10 @@ export class ControlPanelComponent implements OnInit {
   onClienteChange(cliente: string) {
     this.clienteSelecionado = cliente;
     this.atualizarDados(cliente);
+  }
+
+  // Captura o mousedown na barra superior e envia para o AppComponent
+  dragStart(event: MouseEvent) {
+    this.mousedownTopbar.emit(event);
   }
 }

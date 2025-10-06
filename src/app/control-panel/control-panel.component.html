@@ -1,5 +1,5 @@
 <div class="control-card">
-  <div class="card-top">
+  <div class="card-top" (mousedown)="dragStart($event)">
     <span class="card-title">Painel de Controle</span>
     <div class="card-actions">
       <button class="btn-fechar" (click)="removerPanel()">×</button>
