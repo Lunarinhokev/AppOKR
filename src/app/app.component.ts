@@ -13,40 +13,31 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
 })
 export class AppComponent implements OnInit {
   mostrarOpcao = false;
-
   panels: {id: number, type: 'controle' | 'relatorio', top: number, left: number}[] = [];
-
   nextId = 1;
-
-  dataAtual: Date = new Date(); 
+  dataAtual: Date = new Date();
 
   ngOnInit() {
-    // data
     setInterval(() => {
       this.dataAtual = new Date();
     }, 1000);
   }
 
   adicionarPanel(tipo: 'controle' | 'relatorio') {
-  this.panels.push({
-    id: this.nextId++,
-    type: tipo,
-    top: 50,   // posição inicial (px)
-    left: 50
-  });
-}
-
-
-  drop(event: any) {
-    const prevIndex = event.previousIndex;
-    const currIndex = event.currentIndex;
-    const temp = this.panels[prevIndex];
-    this.panels[prevIndex] = this.panels[currIndex];
-    this.panels[currIndex] = temp;
+    this.panels.push({
+      id: this.nextId++,
+      type: tipo,
+      top: 50,
+      left: 50
+    });
   }
 
   startDrag(event: MouseEvent, panel: any) {
-  event.preventDefault(); // evita seleção de texto
+  // se o target for um select ou button, não inicia drag
+  const target = event.target as HTMLElement;
+  if (['SELECT', 'OPTION', 'BUTTON'].includes(target.tagName)) return;
+
+  event.preventDefault();
   const startX = event.clientX;
   const startY = event.clientY;
   const startTop = panel.top;

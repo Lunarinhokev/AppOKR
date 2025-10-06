@@ -1,15 +1,15 @@
 <div class="control-card">
-  <!-- Cabeçalho -->
   <div class="card-top">
     <span class="card-title">Painel de Controle</span>
-    <button class="btn-fechar" (click)="removerPanel()">×</button>
+    <div class="card-actions">
+      <button class="btn-fechar" (click)="removerPanel()">×</button>
+    </div>
   </div>
 
-  <!-- Corpo -->
   <div class="card-body">
     <div class="campo">
       <label for="cliente">Nome do Cliente</label>
-      <select id="cliente" [(ngModel)]="clienteSelecionado" (change)="atualizarDados(clienteSelecionado)">
+      <select [(ngModel)]="clienteSelecionado" (ngModelChange)="onClienteChange($event)">
         <option *ngFor="let c of clientes" [value]="c">{{ c }}</option>
       </select>
     </div>

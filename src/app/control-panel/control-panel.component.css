@@ -1,4 +1,4 @@
-/* Card principal */
+/* Main*/
 .control-card {
   background-color: #f9f9f9;        
   border-radius: 10px;
@@ -15,12 +15,11 @@
   transform: translateY(-3px);
 }
 
-/* Card com efeito de atualização */
+/* Card update effect*/
 .control-card.flash-card {
   box-shadow: 0 0 15px 3px #a8e6a1; 
 }
 
-/* Cabeçalho do card */
 .card-top {
   display: flex;
   justify-content: space-between;
@@ -58,14 +57,13 @@
   transform: scale(0.9);
 }
 
-/* Corpo do card */
+/* Body */
 .card-body {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-/* Campos */
 .campo {
   display: flex;
   flex-direction: column;
@@ -96,7 +94,7 @@
   transition: background-color 0.5s;
 }
 
-/* Efeito de piscar nos valores */
+/* Efeito de piscar */
 @keyframes piscar {
   0% { background-color: #dcdcdc; }
   50% { background-color: #a8e6a1; }
