@@ -1,40 +1,75 @@
-<div class="control-card">
+<div class="control-card" *ngIf="getClienteSelecionado() as cliente">
   <div class="card-top" (mousedown)="dragStart($event)">
-    <span class="card-title">Painel de Controle</span>
+    <span class="card-title">
+      Control Panel
+      <span *ngIf="cliente.novos > 30" class="alert-icon" title="ALERTA MÁXIMO!">⚠️</span>
+    </span>
     <div class="card-actions">
-      <button class="btn-fechar" (click)="removerPanel()">×</button>
+      <button class="btn-fechar" (click)="removerPanel()" aria-label="Close Panel">×</button>
     </div>
   </div>
 
   <div class="card-body">
+    <!-- Seleção de cliente -->
     <div class="campo">
-      <label for="cliente">Nome do Cliente</label>
-      <select [(ngModel)]="clienteSelecionado" (ngModelChange)="onClienteChange($event)">
-        <option *ngFor="let c of clientes" [value]="c">{{ c }}</option>
+      <label for="cliente">Client Name</label>
+      <select id="cliente" [(ngModel)]="clienteSelecionado" (ngModelChange)="onClienteChange($event)">
+        <option *ngFor="let c of clientes" [value]="c.nome">{{ c.nome }}</option>
       </select>
     </div>
 
+    <!-- Documentos a processar -->
     <div class="campo">
-      <label>Documentos a Processar hoje:</label>
-      <div class="valor" [class.efeito-novo]="efeitoNovo">{{ documentosProcessar }}</div>
-    </div>
-
-    <div class="campo">
-      <label>Total de Documentos do Dia:</label>
-      <div class="valor">{{ totalDocumentos }}</div>
-    </div>
-
-    <div class="campo">
-      <label>% Processamento Manual do dia:</label>
-      <div class="barra-container">
-        <div class="barra manual" [style.width.%]="percManual">{{ percManual }}%</div>
+      <label>Documents to Process Today:</label>
+      <div 
+        class="valor" 
+        [class.efeito-novo]="efeitoNovo && cliente.novos <= 20"
+        [style.color]="getCorDocumento()"
+        [style.backgroundColor]="getFundoDocumento()"
+        aria-label="Documents to process today: {{ cliente.novos }}"
+      >
+        {{ cliente.novos }}
       </div>
     </div>
 
+    <!-- Total processados -->
     <div class="campo">
-      <label>% Processamento Automático do dia:</label>
-      <div class="barra-container">
-        <div class="barra automatico" [style.width.%]="percAutomatico">{{ percAutomatico }}%</div>
+      <label>Total Documents Processed Today:</label>
+      <div 
+        class="valor"
+        aria-label="Total documents processed today: {{ cliente.processados }}"
+      >
+        {{ cliente.processados }}
+      </div>
+    </div>
+
+    <!-- % Manual -->
+    <div class="campo">
+      <label>% Manual Processing Today:</label>
+      <div class="barra-container" 
+           role="progressbar" 
+           [attr.aria-valuenow]="cliente.percManual" 
+           aria-valuemin="0" 
+           aria-valuemax="100" 
+           title="{{ cliente.percManual }}% processed manually">
+        <div class="barra manual" [style.width.%]="cliente.percManual">
+          {{ cliente.percManual }}%
+        </div>
+      </div>
+    </div>
+
+    <!-- % Automático -->
+    <div class="campo">
+      <label>% Automatic Processing Today:</label>
+      <div class="barra-container" 
+           role="progressbar" 
+           [attr.aria-valuenow]="cliente.percAutomatico" 
+           aria-valuemin="0" 
+           aria-valuemax="100" 
+           title="{{ cliente.percAutomatico }}% processed automatically">
+        <div class="barra automatico" [style.width.%]="cliente.percAutomatico">
+          {{ cliente.percAutomatico }}%
+        </div>
       </div>
     </div>
   </div>

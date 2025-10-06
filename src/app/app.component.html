@@ -1,39 +1,38 @@
 <div class="topo-fixo">
-  <h1>GerenciApp</h1>
-  <div class="data-atual">{{ dataAtual | date:'dd/MM/yyyy HH:mm:ss' }}</div>
+  <h1>ManageApp</h1>
+  <div class="data-atual">{{ dataAtual | date:'MM/dd/yyyy HH:mm:ss' }}</div>
 </div>
 
 <div class="container">
-  <button class="btn-adicionar" (click)="mostrarOpcao = !mostrarOpcao">+</button>
+  <button class="btn-adicionar" title="New / Create" (click)="mostrarOpcao = !mostrarOpcao">+</button>
 
   <div *ngIf="mostrarOpcao" class="menu-flutuante">
     <button class="opcao" (click)="adicionarPanel('controle')">
-      Criar Tela de Controle
+      Create Control Panel
     </button>
     <button class="opcao" (click)="adicionarPanel('relatorio')">
-      Criar Tela de Relatório
+      Create Report Panel
     </button>
   </div>
 
   <div *ngFor="let p of panels; let i = index"
        [ngStyle]="{'top.px': p.top, 'left.px': p.left, 'position':'absolute'}">
 
-    <!-- Painel de Controle -->
+    <!-- Control Panel -->
     <app-control-panel *ngIf="p.type==='controle'"
                        (remove)="panels.splice(i,1)"
                        (mousedownTopbar)="startDrag($event, p)">
     </app-control-panel>
 
-    <!-- Relatório -->
+    <!-- Reports -->
     <div *ngIf="p.type==='relatorio'" class="relatorio-card">
       <div class="card-top" (mousedown)="startDrag($event, p)">
         <span class="card-title">Relatório</span>
         <button class="btn-fechar" (click)="panels.splice(i,1)">×</button>
       </div>
       <div class="card-body">
-        <p>Tela de Relatório (em construção)</p>
+        <p>Report Panel (Under Construction)</p>
       </div>
     </div>
-
   </div>
 </div>

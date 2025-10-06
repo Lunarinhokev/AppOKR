@@ -16,7 +16,7 @@ body {
   min-height: 100vh;
   width: 100%;                 
   background-color: #FFFCEE;         
-  background-image: radial-gradient(#D6CDAA 1px, transparent 1px); /* pontinhos discretos */
+  background-image: radial-gradient(#D6CDAA 1px, transparent 1px); /* pontinhos */
   background-size: 30px 30px;
   background-repeat: repeat;    
   background-position: top left;
@@ -171,7 +171,7 @@ h1 {
 .data-atual {
   font-size: 18px;
   color: #555;
-  margin-top: 35px;   /* espaço entre o título e a data */
+  margin-top: 35px;   /* title-data space*/
 }
 
 
