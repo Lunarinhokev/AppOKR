@@ -24,11 +24,12 @@ export class AppComponent implements OnInit {
   }
 
   adicionarPanel(tipo: 'controle' | 'relatorio') {
+    //console.log('Adicionando panel:', tipo);
     this.panels.push({
       id: this.nextId++,
       type: tipo,
-      top: 50,
-      left: 50
+      top: 50 + this.panels.length * 30,
+      left: 50 + this.panels.length * 30
     });
   }
 

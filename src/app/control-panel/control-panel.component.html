@@ -1,9 +1,13 @@
-<div class="control-card" *ngIf="getClienteSelecionado() as cliente">
+<div class="control-card">
   <div class="card-top" (mousedown)="dragStart($event)">
     <span class="card-title">
       Control Panel
-      <span *ngIf="cliente.novos > 30" class="alert-icon" title="ALERTA MÁXIMO!">⚠️</span>
+      <!-- cria variável cliente apenas para o ícone, sem esconder o painel -->
+      <ng-container *ngIf="getClienteSelecionado() as clienteTop">
+        <span *ngIf="clienteTop.novos > 30" class="alert-icon" title="ALERTA MÁXIMO!">⚠️</span>
+      </ng-container>
     </span>
+
     <div class="card-actions">
       <button class="btn-fechar" (click)="removerPanel()" aria-label="Close Panel">×</button>
     </div>
@@ -14,63 +18,64 @@
     <div class="campo">
       <label for="cliente">Client Name</label>
       <select id="cliente" [(ngModel)]="clienteSelecionado" (ngModelChange)="onClienteChange($event)">
+        <option value="">-- Select --</option>
         <option *ngFor="let c of clientes" [value]="c.nome">{{ c.nome }}</option>
       </select>
     </div>
 
-    <!-- Documentos a processar -->
-    <div class="campo">
-      <label>Documents to Process Today:</label>
-      <div 
-        class="valor" 
-        [class.efeito-novo]="efeitoNovo && cliente.novos <= 20"
-        [style.color]="getCorDocumento()"
-        [style.backgroundColor]="getFundoDocumento()"
-        aria-label="Documents to process today: {{ cliente.novos }}"
-      >
-        {{ cliente.novos }}
-      </div>
-    </div>
-
-    <!-- Total processados -->
-    <div class="campo">
-      <label>Total Documents Processed Today:</label>
-      <div 
-        class="valor"
-        aria-label="Total documents processed today: {{ cliente.processados }}"
-      >
-        {{ cliente.processados }}
-      </div>
-    </div>
-
-    <!-- % Manual -->
-    <div class="campo">
-      <label>% Manual Processing Today:</label>
-      <div class="barra-container" 
-           role="progressbar" 
-           [attr.aria-valuenow]="cliente.percManual" 
-           aria-valuemin="0" 
-           aria-valuemax="100" 
-           title="{{ cliente.percManual }}% processed manually">
-        <div class="barra manual" [style.width.%]="cliente.percManual">
-          {{ cliente.percManual }}%
+    <!-- Os dados aparecem somente quando há um cliente selecionado -->
+    <ng-container *ngIf="getClienteSelecionado() as cliente">
+      <!-- Documentos a processar -->
+      <div class="campo">
+        <label>Documents to Process Today:</label>
+        <div 
+          class="valor" 
+          [class.efeito-novo]="efeitoNovo && cliente.novos <= 20"
+          [style.color]="getCorDocumento()"
+          [style.backgroundColor]="getFundoDocumento()"
+          aria-label="Documents to process today: {{ cliente.novos }}"
+        >
+          {{ cliente.novos }}
         </div>
       </div>
-    </div>
 
-    <!-- % Automático -->
-    <div class="campo">
-      <label>% Automatic Processing Today:</label>
-      <div class="barra-container" 
-           role="progressbar" 
-           [attr.aria-valuenow]="cliente.percAutomatico" 
-           aria-valuemin="0" 
-           aria-valuemax="100" 
-           title="{{ cliente.percAutomatico }}% processed automatically">
-        <div class="barra automatico" [style.width.%]="cliente.percAutomatico">
-          {{ cliente.percAutomatico }}%
+      <!-- Total processados -->
+      <div class="campo">
+        <label>Total Documents Processed Today:</label>
+        <div class="valor" aria-label="Total documents processed today: {{ cliente.processados }}">
+          {{ cliente.processados }}
         </div>
       </div>
-    </div>
+
+      <!-- % Manual -->
+      <div class="campo">
+        <label>% Manual Processing Today:</label>
+        <div class="barra-container" 
+             role="progressbar" 
+             [attr.aria-valuenow]="cliente.percManual" 
+             aria-valuemin="0" 
+             aria-valuemax="100" 
+             title="{{ cliente.percManual }}% processed manually">
+          <div class="barra manual" [style.width.%]="cliente.percManual">
+            {{ cliente.percManual }}%
+          </div>
+        </div>
+      </div>
+
+      <!-- % Automático -->
+      <div class="campo">
+        <label>% Automatic Processing Today:</label>
+        <div class="barra-container" 
+             role="progressbar" 
+             [attr.aria-valuenow]="cliente.percAutomatico" 
+             aria-valuemin="0" 
+             aria-valuemax="100" 
+             title="{{ cliente.percAutomatico }}% processed automatically">
+          <div class="barra automatico" [style.width.%]="cliente.percAutomatico">
+            {{ cliente.percAutomatico }}%
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>
