@@ -24,7 +24,7 @@ export class ControlPanelComponent {
 
   clienteSelecionado = ''; // Nenhum cliente selecionado inicialmente
   efeitoNovo = false;
-  private simulando = false; // Flag para controlar simulação deste card
+  private simulando = false; // Flag para controlar simulação deste card. Tudo funcionando
 
   // Chamado quando o cliente é selecionado no dropdown
   onClienteChange(clienteNome: string) {
